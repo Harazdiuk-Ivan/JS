@@ -33,6 +33,12 @@ function triangle(value1, type1, value2, type2) {
   else if (elements.leg !== undefined && elements.hypotenuse !== undefined) {
     a = elements.leg;
     c = elements.hypotenuse;
+
+  if (a == c) {
+      console.error("Помилка: Катет не може бути більшим або рівним за гіпотенузу.");
+      return "failed";
+    }
+    
     if (a >= c) {
       console.error("Помилка: Катет не може бути більшим або рівним за гіпотенузу.");
       return "failed";
