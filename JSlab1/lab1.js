@@ -5,7 +5,6 @@ console.log(
 );
 
 function triangle(value1, type1, value2, type2) {
-
   if (arguments.length !== 4) {
     console.error("Помилка: Функція приймає рівно 4 аргументи.");
     return "failed";
@@ -21,29 +20,31 @@ function triangle(value1, type1, value2, type2) {
   elements[type1] = value1;
   elements[type2] = value2;
 
- // Якщо задано два катети
- if (type1 === "leg" && type2 === "leg") {
-  a = value1;
-  b = value2;
-  c = Math.sqrt(a * a + b * b); 
-  alpha = Math.asin(a / c) * (180 / Math.PI); 
-  beta = 90 - alpha;
-}
-
-// Якщо задані катет і гіпотенуза
-else if (elements.leg !== undefined && elements.hypotenuse !== undefined) {
-  a = elements.leg;
-  c = elements.hypotenuse;
-  
-  if (a >= c) {
-    console.error("Помилка: Катет не може бути більшим або рівним за гіпотенузу.");
-    return "failed";
+  // Якщо задано два катети
+  if (type1 === "leg" && type2 === "leg") {
+    a = value1;
+    b = value2;
+    c = Math.sqrt(a * a + b * b);
+    alpha = Math.asin(a / c) * (180 / Math.PI);
+    beta = 90 - alpha;
   }
-  
-  b = Math.sqrt(c * c - a * a); 
-  alpha = Math.asin(a / c) * (180 / Math.PI);
-  beta = 90 - alpha;
-} 
+
+  // Якщо задані катет і гіпотенуза
+  else if (elements.leg !== undefined && elements.hypotenuse !== undefined) {
+    a = elements.leg;
+    c = elements.hypotenuse;
+
+    if (a >= c) {
+      console.error(
+        "Помилка: Катет не може бути більшим або рівним за гіпотенузу."
+      );
+      return "failed";
+    }
+
+    b = Math.sqrt(c * c - a * a);
+    alpha = Math.asin(a / c) * (180 / Math.PI);
+    beta = 90 - alpha;
+  }
 
   // Якщо задані гіпотенуза і один з гострих кутів
   else if (elements.hypotenuse !== undefined && elements.angle !== undefined) {
@@ -108,6 +109,3 @@ else if (elements.leg !== undefined && elements.hypotenuse !== undefined) {
   console.log(`Кути трикутника: alpha = ${alpha}, beta = ${beta}`);
   return "success";
 }
-
-
-
