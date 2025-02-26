@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Калькулятор трикутника</title>
+    <script src="lab1.js"></script>
+</head>
+<body>
+    <h1>Калькулятор трикутника</h1>
+    <label for="value1">Значення 1:</label>
+    <input type="number" id="value1">
+    <select id="type1">
+        <option value="leg">Катет</option>
+        <option value="hypotenuse">Гіпотенуза</option>
+        <option value="adjacent angle">Прилеглий кут</option>
+        <option value="opposite angle">Протилежний кут</option>
+        <option value="angle">Кут при гіпотенузі</option>
+    </select>
+    <br>
+    <label for="value2">Значення 2:</label>
+    <input type="number" id="value2">
+    <select id="type2">
+        <option value="leg">Катет</option>
+        <option value="hypotenuse">Гіпотенуза</option>
+        <option value="adjacent angle">Прилеглий кут</option>
+        <option value="opposite angle">Протилежний кут</option>
+        <option value="angle">Кут при гіпотенузі</option>
+    </select>
+    <br>
+    <button onclick="calculateTriangle()">Обчислити</button>
+    <h2>Результат:</h2>
+    <p id="result"></p>
+
+    <script>
+        function calculateTriangle() {
+            let value1 = parseFloat(document.getElementById("value1").value);
+            let type1 = document.getElementById("type1").value;
+            let value2 = parseFloat(document.getElementById("value2").value);
+            let type2 = document.getElementById("type2").value;
+            
+            let result = triangle(value1, type1, value2, type2);
+            document.getElementById("result").innerText = result === "failed" ? "Помилка у введених даних" : "Обчислення виконано. Перевірте консоль.";
+        }
+    </script>
+</body>
+</html>
