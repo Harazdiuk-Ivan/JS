@@ -1,6 +1,8 @@
 console.log("Використання: triangle(value1, type1, value2, type2)");
 console.log("Можливі типи: 'leg' (катет), 'hypotenuse' (гіпотенуза),");
-console.log("'adjacent angle' (прилеглий кут), 'opposite angle' (протилежний кут), 'angle' (кут при гіпотенузі).");
+console.log(
+  "'adjacent angle' (прилеглий кут), 'opposite angle' (протилежний кут), 'angle' (кут при гіпотенузі)."
+);
 
 function round(value, precision = 9) {
   return parseFloat(value.toFixed(precision));
@@ -34,17 +36,19 @@ function triangle(value1, type1, value2, type2) {
     a = elements.leg;
     c = elements.hypotenuse;
 
-  if (a == c) {
-      console.error("Помилка: Катет не може бути більшим або рівним за гіпотенузу.");
-      return "failed";
-    }
-    
     if (a >= c) {
-      console.error("Помилка: Катет не може бути більшим або рівним за гіпотенузу.");
+      console.error(
+        "Помилка: Катет не може бути більшим або рівним за гіпотенузу."
+      );
       return "failed";
     }
     b = Math.sqrt(c * c - a * a);
     alpha = Math.asin(a / c) * (180 / Math.PI);
+
+    if (b == c) {
+      console.error("Помилка: Сторона не може бути рівна гіпотенузі.");
+      return "failed";
+    }
   }
   // Якщо задані гіпотенуза і один з гострих кутів
   else if (elements.hypotenuse !== undefined && elements.angle !== undefined) {
@@ -59,7 +63,10 @@ function triangle(value1, type1, value2, type2) {
     b = c * Math.cos(rad);
   }
   // Катет + протилежний кут
-  else if (elements.leg !== undefined && elements["opposite angle"] !== undefined) {
+  else if (
+    elements.leg !== undefined &&
+    elements["opposite angle"] !== undefined
+  ) {
     a = elements.leg;
     alpha = elements["opposite angle"];
     if (alpha <= 0 || alpha >= 90) {
@@ -71,7 +78,10 @@ function triangle(value1, type1, value2, type2) {
     b = Math.sqrt(c * c - a * a);
   }
   // Катет + прилеглий кут
-  else if (elements.leg !== undefined && elements["adjacent angle"] !== undefined) {
+  else if (
+    elements.leg !== undefined &&
+    elements["adjacent angle"] !== undefined
+  ) {
     b = elements.leg;
     beta = elements["adjacent angle"];
     if (beta <= 0 || beta >= 90) {
@@ -83,7 +93,9 @@ function triangle(value1, type1, value2, type2) {
     a = Math.sqrt(c * c - b * b);
     alpha = 90 - beta;
   } else {
-    console.error("Помилка: Неправильні типи аргументів. Перевірте інструкцію.");
+    console.error(
+      "Помилка: Неправильні типи аргументів. Перевірте інструкцію."
+    );
     return "failed";
   }
 
