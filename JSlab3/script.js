@@ -4,9 +4,9 @@
   for (let i = 0; i < names.length; i++) {
     let firstL = names[i].charAt(0).toLowerCase();
     if (firstL === "j") {
-      SpeakGoodBye.(names[i]);
+      SpeakGoodBye.speak(names[i]);
     } else {
-      SpeakHello.(names[i]);
+      SpeakHello.speak(names[i]);
     }
   }
 
