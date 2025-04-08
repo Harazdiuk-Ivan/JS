@@ -34,7 +34,7 @@
 
       console.log('Bubble Sort: ', order, '\nComparisons: ', comparisons, '\nSwaps: ', swaps);
       if (undefinedCount > 0) {
-          console.log('Undefined values ', undefinedCount, '\n\n');
+          console.log('Undefined values ', undefinedCount, '\n');
       }
       return array;
   }
@@ -76,7 +76,7 @@
 
       console.log('Selection Sort: ', order, '\nComparisons: ', comparisons, '\nSwaps: ', swaps);
       if (undefinedCount > 0) { 
-          console.log('Undefined values ', undefinedCount, '\n\n');
+          console.log('Undefined values ', undefinedCount, '\n');
       }
       return array;
   }
@@ -118,7 +118,7 @@
 
       console.log('Insertion Sort: ', order, '\nComparisons: ', comparisons, '\nSwaps: ', swaps);
       if (undefinedCount > 0) { 
-          console.log('Undefined values ', undefinedCount, '\n\n');
+          console.log('Undefined values ', undefinedCount, '\n');
       }
       return array;
   }
@@ -165,7 +165,7 @@
 
       console.log('Shell Sort: ', order, '\nComparisons: ', comparisons, '\nSwaps: ', swaps);
       if (undefinedCount > 0) { 
-          console.log('Undefined values ', undefinedCount, '\n\n');
+          console.log('Undefined values ', undefinedCount, '\n');
       }       
       return array;
   }
@@ -220,7 +220,7 @@
 
       console.log('Quick Sort: ', order, '\nComparisons: ', comparisons, '\nSwaps: ', swaps);
       if (undefinedCount > 0) {
-          console.log('Undefined values ', undefinedCount, '\n\n');
+          console.log('Undefined values ', undefinedCount, '\n');
       }           
 
       return array;
