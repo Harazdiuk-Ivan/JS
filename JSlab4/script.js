@@ -1,45 +1,59 @@
-let array_ = [];
-for (let i = 0; i < 100; i++) {
-    array_.push(Math.floor(Math.random() * 100));
+function generateArray(size, withUndefined = false) {
+    let arr = [];
+    for (let i = 0; i < size; i++) {
+        if (withUndefined && Math.random() > 0.8) {
+            arr.push(undefined);
+        } else {
+            arr.push(Math.floor(Math.random() * 100));
+        }
+    }
+    return arr;
 }
 
-console.log("МАСИВ (БЕЗ undefined)");
+function arrayToString(arr) {
+    return arr.map(item => item === undefined ? 'undefined' : item).join(" ");
+}
 
-console.log("\nЗА ЗРОСТАННЯМ:");
-SortingLib.bubbleSort(array_.slice(), "asc");
-SortingLib.selectionSort(array_.slice(), "asc");
-SortingLib.insertionSort(array_.slice(), "asc");
-SortingLib.shellSort(array_.slice(), "asc");
-SortingLib.quickSort(array_.slice(), "asc");
+function printSortResults(sortFunction, arr, order, name) {
+    console.log(`\nArray for ${name}:`);
+    console.log(arrayToString(arr));
+    console.log(`Sorted array ${name}:`);
+    let sortedArr = sortFunction(arr, order);
+    console.log(arrayToString(sortedArr));
+}
 
-console.log("\nЗА СПАДАННЯМ:");
-SortingLib.bubbleSort(array_.slice(), "desc");  
-SortingLib.selectionSort(array_.slice(), "desc");
-SortingLib.insertionSort(array_.slice(), "desc");
-SortingLib.shellSort(array_.slice(), "desc");
-SortingLib.quickSort(array_.slice(), "desc");
+(function() {
+    console.log("МАСИВ (БЕЗ undefined)");
 
-let array_s = [];
-for (let i = 0; i < 100; i++) {
-    if (i % 10 === 0) {
-        array_s.push(undefined); 
-    } else {
-        array_s.push(Math.floor(Math.random() * 1000)); 
-    }
-  }
+    let arrBubble = generateArray(100);
+    printSortResults(SortingLib.bubbleSort, arrBubble.slice(), "asc", "Bubble sort");
 
-  console.log("\n\nМАСИВ (З undefined)");
+    let arrSelection = generateArray(100);
+    printSortResults(SortingLib.selectionSort, arrSelection.slice(), "asc", "Selection sort");
 
-  console.log("\nЗА ЗРОСТАННЯМ:");
-  SortingLib.bubbleSort(array_s.slice(), "asc");
-  SortingLib.selectionSort(array_s.slice(), "asc");
-  SortingLib.insertionSort(array_s.slice(), "asc");
-  SortingLib.shellSort(array_s.slice(), "asc");
-  SortingLib.quickSort(array_s.slice(), "asc");
+    let arrInsertion = generateArray(100);
+    printSortResults(SortingLib.insertionSort, arrInsertion.slice(), "desc", "Insertion sort");
 
-  console.log("\nЗА СПАДАННЯМ:");
-  SortingLib.bubbleSort(array_s.slice(), "desc");
-  SortingLib.selectionSort(array_s.slice(), "desc");
-  SortingLib.insertionSort(array_s.slice(), "desc");
-  SortingLib.shellSort(array_s.slice(), "desc");
-  SortingLib.quickSort(array_s.slice(), "desc");
+    let arrShell = generateArray(100);
+    printSortResults(SortingLib.shellSort, arrShell.slice(), "desc", "Shell sort");
+
+    let arrQuick = generateArray(100);
+    printSortResults(SortingLib.quickSort, arrQuick.slice(), "asc", "Quick sort");
+
+    console.log("\n\n\nМАСИВ (З undefined)");
+
+    let arrBubbleUndef = generateArray(100, true);
+    printSortResults(SortingLib.bubbleSort, arrBubbleUndef.slice(), "asc", "Bubble sort with undefined");
+
+    let arrSelectionUndef = generateArray(100, true);
+    printSortResults(SortingLib.selectionSort, arrSelectionUndef.slice(), "asc", "Selection sort with undefined");
+
+    let arrInsertionUndef = generateArray(100, true);
+    printSortResults(SortingLib.insertionSort, arrInsertionUndef.slice(), "asc", "Insertion sort with undefined");
+
+    let arrShellUndef = generateArray(100, true);
+    printSortResults(SortingLib.shellSort, arrShellUndef.slice(), "asc", "Shell sort with undefined");
+
+    let arrQuickUndef = generateArray(100, true);
+    printSortResults(SortingLib.quickSort, arrQuickUndef.slice(), "asc", "Quick sort with undefined");
+})();
