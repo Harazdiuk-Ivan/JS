@@ -9,49 +9,58 @@ let moveHistory = [];
 let stateHistory = []; 
 
 async function loadConfig(configNumber) {
-    const configs = {
-        1: {
-            board: [
-                [1, 1, 1, 1, 1],
-                [0, 0, 1, 0, 0],
-                [1, 0, 1, 0, 1],
-                [1, 0, 1, 1, 1],
-                [0, 1, 0, 0, 1]
-            ],
-            minSteps: 7
-        },
-        2: {
-            board: [
-                [1, 0, 1, 0, 0],
-                [0, 1, 1, 1, 1],
-                [0, 0, 1, 1, 0],
-                [0, 0, 1, 0, 0],
-                [0, 1, 1, 1, 0]
-            ],
-            minSteps: 8
-        },
-        3: {
-            board: [
-                [1, 0, 0, 0, 0],
-                [0, 1, 1, 0, 1],
-                [1, 0, 0, 1, 1],
-                [0, 0, 1, 1, 1],
-                [1, 1, 0, 0, 0]
-            ],
-            minSteps: 9
-        },
-        4: {
-            board: [
-                [0, 0, 0, 0, 0],
-                [0, 0, 1, 0, 0],
-                [0, 1, 1, 1, 0],
-                [0, 0, 1, 0, 0],
-                [0, 0, 0, 0, 0]
-            ],
-            minSteps: 1
+    try {
+        const response = await fetch(`configs/config${configNumber}.json`);
+        if (!response.ok) {
+            throw new Error(`Failed to load config${configNumber}.json`);
         }
-    };
-    return configs[configNumber];
+        return await response.json();
+    } catch (error) {
+        console.error('Error loading config:', error);
+        const configs = {
+            1: {
+                board: [
+                    [1, 1, 1, 1, 1],
+                    [0, 0, 1, 0, 0],
+                    [1, 0, 1, 0, 1],
+                    [1, 0, 1, 1, 1],
+                    [0, 1, 0, 0, 1]
+                ],
+                minSteps: 7
+            },
+            2: {
+                board: [
+                    [1, 0, 1, 0, 0],
+                    [0, 1, 1, 1, 1],
+                    [0, 0, 1, 1, 0],
+                    [0, 0, 1, 0, 0],
+                    [0, 1, 1, 1, 0]
+                ],
+                minSteps: 8
+            },
+            3: {
+                board: [
+                    [1, 0, 0, 0, 0],
+                    [0, 1, 1, 0, 1],
+                    [1, 0, 0, 1, 1],
+                    [0, 0, 1, 1, 1],
+                    [1, 1, 0, 0, 0]
+                ],
+                minSteps: 9
+            },
+            4: {
+                board: [
+                    [0, 0, 0, 0, 0],
+                    [0, 0, 1, 0, 0],
+                    [0, 1, 1, 1, 0],
+                    [0, 0, 1, 0, 0],
+                    [0, 0, 0, 0, 0]
+                ],
+                minSteps: 1
+            }
+        };
+        return configs[configNumber];
+    }
 }
 
 function createBoard(board) {
@@ -135,6 +144,10 @@ function checkWin() {
 }
 
 async function newGame() {
+    const gameBoard = document.getElementById('game-board');
+    gameBoard.innerHTML = '';
+    document.querySelectorAll('.cell').forEach(cell => cell.removeEventListener('click', handleCellClick));
+
     const availableConfigs = [1, 2, 3, 4].filter(num => !usedConfigs.includes(num));
     if (availableConfigs.length === 0) {
         usedConfigs = [];
