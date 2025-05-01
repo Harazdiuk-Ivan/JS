@@ -10,7 +10,7 @@ let stateHistory = [];
 
 async function loadConfig(configNumber) {
     try {
-        const response = await fetch(`configs/config${configNumber}.json`);
+        const response = await fetch(`https://harazdiuk-ivan.github.io/JS/JSlab6/configs/config${configNumber}.json`);
         if (!response.ok) {
             throw new Error(`Failed to load config${configNumber}.json`);
         }
