@@ -9,58 +9,11 @@ let moveHistory = [];
 let stateHistory = []; 
 
 async function loadConfig(configNumber) {
-    try {
         const response = await fetch(`https://harazdiuk-ivan.github.io/JS/JSlab6/configs/config${configNumber}.json`);
         if (!response.ok) {
             throw new Error(`Failed to load config${configNumber}.json`);
         }
         return await response.json();
-    } catch (error) {
-        console.error('Error loading config:', error);
-        const configs = {
-            1: {
-                board: [
-                    [1, 1, 1, 1, 1],
-                    [0, 0, 1, 0, 0],
-                    [1, 0, 1, 0, 1],
-                    [1, 0, 1, 1, 1],
-                    [0, 1, 0, 0, 1]
-                ],
-                minSteps: 7
-            },
-            2: {
-                board: [
-                    [1, 0, 1, 0, 0],
-                    [0, 1, 1, 1, 1],
-                    [0, 0, 1, 1, 0],
-                    [0, 0, 1, 0, 0],
-                    [0, 1, 1, 1, 0]
-                ],
-                minSteps: 8
-            },
-            3: {
-                board: [
-                    [1, 0, 0, 0, 0],
-                    [0, 1, 1, 0, 1],
-                    [1, 0, 0, 1, 1],
-                    [0, 0, 1, 1, 1],
-                    [1, 1, 0, 0, 0]
-                ],
-                minSteps: 9
-            },
-            4: {
-                board: [
-                    [0, 0, 0, 0, 0],
-                    [0, 0, 1, 0, 0],
-                    [0, 1, 1, 1, 0],
-                    [0, 0, 1, 0, 0],
-                    [0, 0, 0, 0, 0]
-                ],
-                minSteps: 1
-            }
-        };
-        return configs[configNumber];
-    }
 }
 
 function createBoard(board) {
