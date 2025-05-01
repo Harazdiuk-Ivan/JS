@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MicroFund Desktop Website</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #e6f0fa, #ffffff);
+      color: #333;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 30px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 82, 155, 0.1);
+    }
+
+    .header {
+      background: linear-gradient(90deg, #0052cc, #2684ff);
+      padding: 25px;
+      border-radius: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 5px 15px rgba(0, 82, 155, 0.2);
+    }
+
+    .header h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 32px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #ffffff;
+    }
+
+    .account-info {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+
+    .account-info p {
+      font-size: 16px;
+      font-weight: 400;
+      color: #0052cc; /* Виправлено: колір тексту змінено на синій для контрасту з білим фоном кнопки */
+      opacity: 0.9;
+    }
+
+    .balance {
+      font-size: 20px;
+      font-weight: 600;
+      background: #ffffff;
+      color: #0052cc;
+      padding: 10px 20px;
+      border-radius: 25px;
+      box-shadow: 0 3px 10px rgba(0, 82, 155, 0.2);
+      transition: transform 0.3s ease;
+    }
+
+    .balance:hover {
+      transform: scale(1.05);
+    }
+
+    .account-btn {
+      background: #ffffff;
+      color: #0052cc;
+      padding: 10px 20px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 600;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+
+
+    .account-btn:hover {
+      background: #0052cc;
+      color: #ffffff;
+    }
+
+    .main-content {
+      display: flex;
+      gap: 30px;
+      margin-top: 30px;
+    }
+
+    .sidebar {
+      width: 280px;
+      background: #ffffff;
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: 0 5px 15px rgba(0, 82, 155, 0.1);
+    }
+
+    .sidebar h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 22px;
+      color: #0052cc;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .menu-item {
+      padding: 15px;
+      margin-bottom: 15px;
+      background: linear-gradient(90deg, #0052cc, #2684ff);
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+      color: #ffffff;
+      text-align: center;
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+
+    .menu-item:hover {
+      transform: translateX(10px);
+      background: linear-gradient(90deg, #2684ff, #0052cc);
+    }
+
+    .content {
+      flex: 1;
+      background: #ffffff;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 5px 15px rgba(0, 82, 155, 0.1);
+    }
+
+    .content h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 24px;
+      color: #0052cc;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .section {
+      margin-bottom: 40px;
+    }
+
+    .card {
+      background: #f7faff;
+      border-radius: 15px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 5px 15px rgba(0, 82, 155, 0.05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card h3 {
+      font-size: 18px;
+      color: #0052cc;
+      margin-bottom: 5px;
+    }
+
+    .card p {
+      font-size: 14px;
+      color: #666;
+    }
+
+    .card .amount {
+      font-size: 16px;
+      font-weight: 600;
+      color: #2684ff;
+    }
+
+    .invest-btn {
+      background: #0052cc;
+      color: #ffffff;
+      padding: 10px 20px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+      transition: background 0.3s ease;
+    }
+
+    .invest-btn:hover {
+      background: #003d99;
+    }
+
+    .promo-section {
+      background: #f7faff;
+      padding: 20px;
+      border-radius: 15px;
+      margin-bottom: 20px;
+    }
+
+    .promo-card {
+      background: linear-gradient(90deg, #0052cc, #2684ff);
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 15px;
+      box-shadow: 0 5px 15px rgba(0, 82, 155, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .promo-card:hover {
+      transform: scale(1.02);
+    }
+
+    .promo-card h3 {
+      font-size: 16px;
+      color: #ffffff;
+      margin-bottom: 5px;
+    }
+
+    .promo-card p {
+      font-size: 14px;
+      color: #e6f0fa;
+    }
+
+    .promo-card .promo-btn {
+      background: #ffffff;
+      color: #0052cc;
+      padding: 8px 15px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 14px;
+      margin-top: 10px;
+      display: inline-block;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    .promo-card .promo-btn:hover {
+      background: #0052cc;
+      color: #ffffff;
+    }
+
+    .apply-form {
+      background: #f7faff;
+      padding: 25px;
+      border-radius: 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .apply-form label {
+      font-size: 14px;
+      color: #0052cc;
+    }
+
+
+    .apply-form input, .apply-form textarea {
+      padding: 12px;
+      border: 1px solid #d1e0ff;
+      border-radius: 8px;
+      font-size: 14px;
+      background: #ffffff;
+      color: #333;
+      width: 100%;
+      transition: border 0.3s ease;
+    }
+
+    .apply-form input:focus, .apply-form textarea:focus {
+      border: 1px solid #2684ff;
+      outline: none;
+    }
+
+    .submit-btn {
+      background: #0052cc;
+      color: #ffffff;
+      padding: 12px 25px;
+      border-radius: 25px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      align-self: center;
+      transition: background 0.3s ease;
+    }
+
+    .submit-btn:hover {
+      background: #003d99;
+    }
+
+    .confirmation-message {
+      margin-top: 20px;
+      font-size: 16px;
+      color: #2684ff;
+      text-align: center;
+      animation: fadeIn 1s ease;
+    }
+
+    .account-details {
+      background: #f7faff;
+      padding: 25px;
+      border-radius: 15px;
+    }
+
+    .account-details p {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 10px;
+    }
+
+    .account-details p strong {
+      color: #0052cc;
+    }
+
+    .transaction {
+      padding: 10px;
+      background: #e6f0fa;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      animation: slideIn 0.5s ease;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideIn {
+      from { transform: translateX(-20px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>MicroFund</h1>
+      <div class="account-info">
+        <p style="color:rgb(255, 255, 255);">Вітаємо, Іван Гараздюк!</p>
+        <p class="balance" id="balance">$700,000</p>
+        <div class="account-btn" onclick="showSection('account-section')">Мій акаунт</div>
+      </div>
+    </div>
+
+    <div class="main-content">
+      <div class="sidebar">
+        <h2>Меню</h2>
+        <div class="menu-item" onclick="showSection('invest-section')">Інвестувати</div>
+        <div class="menu-item" onclick="showSection('apply-section')">Подати заявку</div>
+        <div class="menu-item" onclick="showSection('promo-section')">Акції та пропозиції</div>
+        <div class="menu-item" onclick="showSection('account-section')">Мій акаунт</div>
+      </div>
+
+      <div class="content">
+        <!-- Секція інвестування -->
+        <div id="invest-section" class="section">
+          <h2>Доступні проєкти для інвестування</h2>
+          <div class="card">
+            <div>
+              <h3>Олена, швачка</h3>
+              <p>Відкриття майстерні з пошиття одягу в Україні.</p>
+              <p class="amount">$300</p>
+            </div>
+            <div class="invest-btn" onclick="invest(300, 'Олена, швачка')">Інвестувати</div>
+          </div>
+          <div class="card">
+            <div>
+              <h3>Ахмед, фермер</h3>
+              <p>Система поливу для вирощування манго в Кенії.</p>
+              <p class="amount">$500</p>
+            </div>
+            <div class="invest-btn" onclick="invest(500, 'Ахмед, фермер')">Інвестувати</div>
+          </div>
+          <div class="card">
+            <div>
+              <h3>Марія, кондитерка</h3>
+              <p>Закупівля обладнання для пекарні в Колумбії.</p>
+              <p class="amount">$400</p>
+            </div>
+            <div class="invest-btn" onclick="invest(400, 'Марія, кондитерка')">Інвестувати</div>
+          </div>
+          <div class="card">
+            <div>
+              <h3>Джон, тесляр</h3>
+              <p>Купівля інструментів для виготовлення меблів у Нігерії.</p>
+              <p class="amount">$250</p>
+            </div>
+            <div class="invest-btn" onclick="invest(250, 'Джон, тесляр')">Інвестувати</div>
+          </div>
+          <div class="card">
+            <div>
+              <h3>Софія, флористка</h3>
+              <p>Розширення квіткового магазину в Польщі.</p>
+              <p class="amount">$600</p>
+            </div>
+            <div class="invest-btn" onclick="invest(600, 'Софія, флористка')">Інвестувати</div>
+          </div>
+          <div class="card">
+            <div>
+              <h3>Рауль, рибалка</h3>
+              <p>Ремонт човна для риболовлі в Перу.</p>
+              <p class="amount">$700</p>
+            </div>
+            <div class="invest-btn" onclick="invest(700, 'Рауль, рибалка')">Інвестувати</div>
+          </div>
+          <div class="card">
+            <div>
+              <h3>Аміна, продавчиня</h3>
+              <p>Закупівля товарів для магазину в Єгипті.</p>
+              <p class="amount">$350</p>
+            </div>
+            <div class="invest-btn" onclick="invest(350, 'Аміна, продавчиня')">Інвестувати</div>
+          </div>
+          <div class="card">
+            <div>
+              <h3>Пітер, бджоляр</h3>
+              <p>Розширення бджолиного господарства в Кенії.</p>
+              <p class="amount">$450</p>
+            </div>
+            <div class="invest-btn" onclick="invest(450, 'Пітер, бджоляр')">Інвестувати</div>
+          </div>
+        </div>
+
+        <!-- Секція подачі заявки -->
+        <div id="apply-section" class="section hidden">
+          <h2>Подати заявку на кредит</h2>
+          <div class="apply-form">
+            <label for="loan-amount">Сума кредиту ($):</label>
+            <input type="number" id="loan-amount" placeholder="Введіть суму" min="100">
+
+            <label for="business-description">Опис бізнесу:</label>
+            <textarea id="business-description" rows="4" placeholder="Опишіть ваш бізнес і як використаєте кошти"></textarea>
+
+            <label for="contact-info">Контактні дані:</label>
+            <input type="text" id="contact-info" placeholder="Ваш телефон або email">
+
+            <div class="submit-btn" onclick="submitApplication()">Відправити заявку</div>
+          </div>
+          <div id="apply-confirmation" class="confirmation-message hidden">
+            Ваша заявка успішно відправлена! Очікуйте відповідь протягом 24 годин.
+          </div>
+        </div>
+
+        <!-- Секція акцій та пропозицій -->
+        <div id="promo-section" class="section hidden">
+          <h2>Акції та пропозиції</h2>
+          <div class="promo-section">
+            <div class="promo-card">
+              <h3>Бонус для нових інвесторів</h3>
+              <p>Інвестуйте $1000 і отримайте 2% бонусу на ваш баланс!</p>
+              <div class="promo-btn" onclick="applyPromo('bonus')">Активувати</div>
+            </div>
+            <div class="promo-card">
+              <h3>Преміум-акаунт</h3>
+              <p>Отримайте доступ до ексклюзивних проєктів за $10/місяць.</p>
+              <div class="promo-btn" onclick="applyPromo('premium')">Підключити</div>
+            </div>
+            <div class="promo-card">
+              <h3>Реферальна програма</h3>
+              <p>Запросіть друга та отримайте $50 на баланс!</p>
+              <div class="promo-btn" onclick="applyPromo('referral')">Отримати посилання</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Секція акаунту -->
+        <div id="account-section" class="section hidden">
+          <h2>Мій акаунт</h2>
+          <div class="account-details">
+            <p><strong>Ім’я:</strong> Іван Гараздюк</p>
+            <p><strong>Email:</strong> ivan.harasdiuk@email.com</p>
+            <p><strong>Телефон:</strong> +380 987 654 321</p>
+            <p><strong>Баланс:</strong> <span id="account-balance">$700,000</span></p>
+            <p><strong>Останні транзакції:</strong></p>
+            <div id="transactions">
+              <div class="transaction">Інвестовано $500 в проєкт Ахмеда — 15.04.2025</div>
+              <div class="transaction">Отримано $20 прибутку — 20.04.2025</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let balance = 700000;
+    const transactionsContainer = document.getElementById('transactions');
+
+    function updateBalance() {
+      document.getElementById('balance').textContent = `$${balance.toLocaleString()}`;
+      document.getElementById('account-balance').textContent = `$${balance.toLocaleString()}`;
+    }
+
+    function invest(amount, project) {
+      if (balance >= amount) {
+        balance -= amount;
+        updateBalance();
+        const transaction = document.createElement('div');
+        transaction.classList.add('transaction');
+        transaction.textContent = `Інвестовано $${amount} в проєкт ${project} — ${new Date().toLocaleDateString()}`;
+        transactionsContainer.prepend(transaction);
+        showNotification(`Ви успішно інвестували $${amount} у проєкт ${project}!`);
+      } else {
+        showNotification('Недостатньо коштів на балансі!', 'error');
+      }
+    }
+
+    function applyPromo(type) {
+      if (type === 'bonus') {
+        const bonus = balance * 0.02;
+        balance += bonus;
+        updateBalance();
+        showNotification(`Бонус активовано! Ви отримали $${bonus.toFixed(2)}!`);
+      } else if (type === 'premium') {
+        if (balance >= 10) {
+          balance -= 10;
+          updateBalance();
+          showNotification('Преміум-акаунт підключено!');
+        } else {
+          showNotification('Недостатньо коштів для підключення преміум-акаунту!', 'error');
+        }
+      } else if (type === 'referral') {
+        showNotification('Ваше реферальне посилання: microfund.com/ref/ivan123');
+      }
+    }
+
+    function submitApplication() {
+      const applyForm = document.querySelector('.apply-form');
+      const confirmation = document.getElementById('apply-confirmation');
+      const amount = document.getElementById('loan-amount').value;
+      if (amount < 100) {
+        showNotification('Сума кредиту повинна бути не менше $100!', 'error');
+        return;
+      }
+      applyForm.classList.add('hidden');
+      confirmation.classList.remove('hidden');
+      showNotification('Заявка успішно відправлена!');
+    }
+
+    function showNotification(message, type = 'success') {
+      const notification = document.createElement('div');
+      notification.textContent = message;
+      notification.style.position = 'fixed';
+      notification.style.top = '20px';
+      notification.style.right = '20px';
+      notification.style.padding = '15px 25px';
+      notification.style.borderRadius = '10px';
+      notification.style.color = '#ffffff';
+      notification.style.background = type === 'success' ? '#2684ff' : '#ff4b5c';
+      notification.style.boxShadow = '0 5px 15px rgba(0, 82, 155, 0.3)';
+      notification.style.zIndex = '1000';
+      notification.style.opacity = '0';
+      notification.style.transition = 'opacity 0.5s ease';
+      document.body.appendChild(notification);
+
+      setTimeout(() => {
+        notification.style.opacity = '1';
+      }, 100);
+
+      setTimeout(() => {
+        notification.style.opacity = '0';
+        setTimeout(() => notification.remove(), 500);
+      }, 3000);
+    }
+
+    function showSection(sectionId) {
+      document.querySelectorAll('.section').forEach(section => section.classList.add('hidden'));
+      document.getElementById(sectionId).classList.remove('hidden');
+    }
+
+    // Початкова ініціалізація балансу
+    updateBalance();
+  </script>
+</body>
+</html>
