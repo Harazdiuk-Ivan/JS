@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MicroFund Mobile App</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #e6f0fa, #ffffff);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 10px;
+    }
+
+    .app-container {
+      width: 100%;
+      max-width: 375px;
+      background: #ffffff;
+      border-radius: 20px;
+      box-shadow: 0 4px 15px rgba(0, 82, 155, 0.1);
+      overflow: hidden;
+    }
+
+    .header {
+      background: linear-gradient(90deg, #0052cc, #2684ff);
+      color: #ffffff;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .header h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .header p {
+      font-size: 14px;
+      margin-top: 5px;
+      opacity: 0.9;
+    }
+
+    .nav-buttons {
+      display: flex;
+      justify-content: space-around;
+      padding: 15px;
+      background: #e6f0fa;
+    }
+
+    .nav-button {
+      background: #0052cc;
+      color: #ffffff;
+      padding: 10px 20px;
+      border-radius: 25px;
+      font-size: 16px;
+      font-weight: 600;
+      text-align: center;
+      width: 45%;
+      box-shadow: 0 2px 5px rgba(0, 82, 155, 0.2);
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .nav-button:hover {
+      background: #003d99;
+      transform: scale(1.05);
+    }
+
+    .section {
+      padding: 20px;
+      max-height: 500px;
+      overflow-y: auto;
+    }
+
+    .section h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 18px;
+      color: #0052cc;
+      margin-bottom: 15px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .card {
+      background: #f7faff;
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 15px;
+      box-shadow: 0 2px 5px rgba(0, 82, 155, 0.05);
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card h3 {
+      font-size: 16px;
+      color: #0052cc;
+      margin-bottom: 5px;
+    }
+
+    .card p {
+      font-size: 14px;
+      color: #666;
+      line-height: 1.5;
+    }
+
+    .card .amount {
+      font-size: 16px;
+      font-weight: 600;
+      color: #2684ff;
+      margin-top: 5px;
+    }
+
+    .invest-btn {
+      background: #0052cc;
+      color: #ffffff;
+      padding: 8px 15px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      margin-top: 10px;
+      display: inline-block;
+    }
+
+    .invest-btn:hover {
+      background: #003d99;
+    }
+
+    .apply-section {
+      background: #e6f0fa;
+      padding: 15px;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .apply-section p {
+      font-size: 14px;
+      color: #003366;
+      margin-bottom: 10px;
+    }
+
+    .apply-button {
+      background: #0052cc;
+      color: #ffffff;
+      padding: 10px 30px;
+      border-radius: 25px;
+      font-size: 16px;
+      font-weight: 600;
+      box-shadow: 0 2px 5px rgba(0, 82, 155, 0.2);
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .apply-button:hover {
+      background: #003d99;
+      transform: scale(1.05);
+    }
+
+    .footer {
+      background: #0052cc;
+      color: #ffffff;
+      text-align: center;
+      padding: 10px;
+      font-size: 12px;
+    }
+
+    .page {
+      display: none;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    .processing-page, .investment-page, .applications-page, .promo-page, .account-page {
+      padding: 20px;
+    }
+
+    .processing-page h2, .investment-page h2, .applications-page h2, .promo-page h2, .account-page h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 18px;
+      color: #0052cc;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .investment-form, .apply-form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      background: #f7faff;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    .investment-form label, .apply-form label {
+      font-size: 14px;
+      color: #003366;
+      text-align: left;
+    }
+
+    .investment-form input, .apply-form input, .apply-form textarea {
+      padding: 10px;
+      border: 1px solid #d1e0ff;
+      border-radius: 5px;
+      font-size: 14px;
+      background: #ffffff;
+      color: #333;
+      transition: border 0.3s ease;
+    }
+
+    .investment-form input:focus, .apply-form input:focus, .apply-form textarea:focus {
+      border: 1px solid #2684ff;
+      outline: none;
+    }
+
+    .submit-button {
+      background: #0052cc;
+      color: #ffffff;
+      padding: 10px;
+      border-radius: 25px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .submit-button:hover {
+      background: #003d99;
+      transform: scale(1.05);
+    }
+
+    .confirmation-message {
+      margin-top: 20px;
+      font-size: 16px;
+      color: #28A745;
+      text-align: center;
+      animation: fadeIn 1s ease;
+    }
+
+    .application-card, .promo-card, .transaction {
+      background: #f7faff;
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 15px;
+      box-shadow: 0 2px 5px rgba(0, 82, 155, 0.05);
+      transition: transform 0.3s ease;
+    }
+
+    .application-card:hover, .promo-card:hover, .transaction:hover {
+      transform: translateY(-5px);
+    }
+
+    .application-card {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .application-card p {
+      font-size: 14px;
+      color: #003366;
+    }
+
+    .status-approved {
+      background: #28A745;
+      color: #ffffff;
+      padding: 5px 10px;
+      border-radius: 15px;
+      font-size: 12px;
+    }
+
+    .promo-card h3 {
+      font-size: 16px;
+      color: #0052cc;
+      margin-bottom: 5px;
+    }
+
+    .promo-card p {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 10px;
+    }
+
+    .promo-btn {
+      background: #0052cc;
+      color: #ffffff;
+      padding: 8px 15px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      display: inline-block;
+    }
+
+    .promo-btn:hover {
+      background: #003d99;
+    }
+
+    .account-details p {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 10px;
+    }
+
+    .account-details p strong {
+      color: #0052cc;
+    }
+
+    .transaction {
+      animation: slideIn 0.5s ease;
+    }
+
+    .transaction p {
+      font-size: 14px;
+      color: #003366;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideIn {
+      from { transform: translateX(-20px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <!-- Головна сторінка -->
+    <div id="home-page" class="page active">
+      <div class="header">
+        <h1>MicroFund</h1>
+        <p>Вітаємо, Іван Гараздюк!</p>
+        <p>Баланс: <span id="balance">$234,000,000</span></p>
+      </div>
+
+      <div class="nav-buttons">
+        <div class="nav-button" onclick="showPage('apply-page')">Подати заявку</div>
+        <div class="nav-button" onclick="showPage('invest-page')">Інвестувати</div>
+      </div>
+
+      <div class="section">
+        <h2>Доступні проєкти для інвестування</h2>
+        <div class="card">
+          <h3>Олена, швачка</h3>
+          <p>Відкриття майстерні з пошиття одягу в Україні.</p>
+          <p class="amount">$300</p>
+          <div class="invest-btn" onclick="invest(300, 'Олена, швачка')">Інвестувати</div>
+        </div>
+        <div class="card">
+          <h3>Ахмед, фермер</h3>
+          <p>Система поливу для вирощування манго в Кенії.</p>
+          <p class="amount">$500</p>
+          <div class="invest-btn" onclick="invest(500, 'Ахмед, фермер')">Інвестувати</div>
+        </div>
+        <div class="card">
+          <h3>Марія, кондитерка</h3>
+          <p>Закупівля обладнання для пекарні в Колумбії.</p>
+          <p class="amount">$400</p>
+          <div class="invest-btn" onclick="invest(400, 'Марія, кондитерка')">Інвестувати</div>
+        </div>
+        <div class="card">
+          <h3>Джон, тесляр</h3>
+          <p>Купівля інструментів для виготовлення меблів у Нігерії.</p>
+          <p class="amount">$250</p>
+          <div class="invest-btn" onclick="invest(250, 'Джон, тесляр')">Інвестувати</div>
+        </div>
+        <div class="card">
+          <h3>Софія, флористка</h3>
+          <p>Розширення квіткового магазину в Польщі.</p>
+          <p class="amount">$600</p>
+          <div class="invest-btn" onclick="invest(600, 'Софія, флористка')">Інвестувати</div>
+        </div>
+        <div class="card">
+          <h3>Рауль, рибалка</h3>
+          <p>Ремонт човна для риболовлі в Перу.</p>
+          <p class="amount">$700</p>
+          <div class="invest-btn" onclick="invest(700, 'Рауль, рибалка')">Інвестувати</div>
+        </div>
+        <div class="card">
+          <h3>Аміна, продавчиня</h3>
+          <p>Закупівля товарів для магазину в Єгипті.</p>
+          <p class="amount">$350</p>
+          <div class="invest-btn" onclick="invest(350, 'Аміна, продавчиня')">Інвестувати</div>
+        </div>
+        <div class="card">
+          <h3>Пітер, бджоляр</h3>
+          <p>Розширення бджолиного господарства в Кенії.</p>
+          <p class="amount">$450</p>
+          <div class="invest-btn" onclick="invest(450, 'Пітер, бджоляр')">Інвестувати</div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Ваші заявки</h2>
+        <div class="nav-button" onclick="showPage('applications-page')">Переглянути</div>
+      </div>
+
+      <div class="section">
+        <h2>Акції та пропозиції</h2>
+        <div class="nav-button" onclick="showPage('promo-page')">Переглянути</div>
+      </div>
+
+      <div class="section">
+        <h2>Мій акаунт</h2>
+        <div class="nav-button" onclick="showPage('account-page')">Переглянути</div>
+      </div>
+
+      <div class="section">
+        <h2>Подати заявку на кредит</h2>
+        <div class="apply-section">
+          <p>Отримай кредит за 24 години без застави!</p>
+          <div class="apply-button" onclick="showPage('apply-form-page')">Заповнити заявку</div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <p>© 2025 MicroFund. Усі права захищені.</p>
+      </div>
+    </div>
+
+    <!-- Сторінка форми подачі заявки -->
+    <div id="apply-form-page" class="page">
+      <div class="header">
+        <h1>MicroFund</h1>
+        <p>Вітаємо, Іван Гараздюк!</p>
+        <p>Баланс: <span id="balance-apply">$234,000,000</span></p>
+      </div>
+      <div class="investment-page">
+        <h2>Подати заявку на кредит</h2>
+        <div class="apply-form">
+          <label for="loan-amount">Сума кредиту ($):</label>
+          <input type="number" id="loan-amount" placeholder="Введіть суму" min="100">
+
+          <label for="business-description">Опис бізнесу:</label>
+          <textarea id="business-description" rows="4" placeholder="Опишіть ваш бізнес і як використаєте кошти"></textarea>
+
+          <label for="contact-info">Контактні дані:</label>
+          <input type="text" id="contact-info" placeholder="Ваш телефон або email">
+
+          <div class="submit-button" onclick="submitApplication()">Відправити заявку</div>
+        </div>
+        <div id="apply-confirmation" class="confirmation-message" style="display: none;">
+          Ваша заявка успішно відправлена! Очікуйте відповідь протягом 24 годин.
+        </div>
+        <div class="nav-button" onclick="showPage('home-page')" style="margin-top: 20px;">Повернутися</div>
+      </div>
+      <div class="footer">
+        <p>© 2025 MicroFund. Усі права захищені.</p>
+      </div>
+    </div>
+
+    <!-- Сторінка обробки заявки -->
+    <div id="processing-page" class="page">
+      <div class="header">
+        <h1>MicroFund</h1>
+        <p>Вітаємо, Іван Гараздюк!</p>
+        <p>Баланс: <span id="balance-processing">$234,000,000</span></p>
+      </div>
+      <div class="processing-page">
+        <h2>Ваша заявка в обробці</h2>
+        <p>Ми розглянемо вашу заявку протягом 24 годин. Ви отримаєте сповіщення про результат.</p>
+        <div class="nav-button" onclick="showPage('home-page')">Повернутися</div>
+      </div>
+      <div class="footer">
+        <p>© 2025 MicroFund. Усі права захищені.</p>
+      </div>
+    </div>
+
+    <!-- Сторінка інвестування -->
+    <div id="invest-page" class="page">
+      <div class="header">
+        <h1>MicroFund</h1>
+        <p>Вітаємо, Іван Гараздюк!</p>
+        <p>Баланс: <span id="balance-invest">$234,000,000</span></p>
+      </div>
+      <div class="investment-page">
+        <h2>Скільки хочете інвестувати?</h2>
+        <div class="investment-form">
+          <label for="amount">Сума ($):</label>
+          <input type="number" id="amount" placeholder="Введіть суму" min="10">
+
+          <label for="firstName">Ім’я:</label>
+          <input type="text" id="firstName" placeholder="Ваше ім’я">
+
+          <label for="lastName">Прізвище:</label>
+          <input type="text" id="lastName" placeholder="Ваше прізвище">
+
+          <label for="phone">Номер телефону:</label>
+          <input type="tel" id="phone" placeholder="+380xxxxxxxxx">
+
+          <label for="email">Електронна пошта:</label>
+          <input type="email" id="email" placeholder="example@email.com">
+
+          <div class="submit-button" onclick="submitInvestment()">Інвестувати</div>
+        </div>
+        <div id="confirmation-message" class="confirmation-message" style="display: none;">
+          Повідомлення прийде вам на пошту!
+        </div>
+        <div class="nav-button" onclick="showPage('home-page')" style="margin-top: 20px;">Повернутися</div>
+      </div>
+      <div class="footer">
+        <p>© 2025 MicroFund. Усі права захищені.</p>
+      </div>
+    </div>
+
+    <!-- Сторінка заявок -->
+    <div id="applications-page" class="page">
+      <div class="header">
+        <h1>MicroFund</h1>
+        <p>Вітаємо, Іван Гараздюк!</p>
+        <p>Баланс: <span id="balance-applications">$234,000,000</span></p>
+      </div>
+      <div class="applications-page">
+        <h2>Ваші заявки</h2>
+        <div class="application-card">
+          <p>Кредит на $2000</p>
+          <div class="status-approved">Схвалено</div>
+        </div>
+        <div class="nav-button" onclick="showPage('home-page')">Повернутися</div>
+      </div>
+      <div class="footer">
+        <p>© 2025 MicroFund. Усі права захищені.</p>
+      </div>
+    </div>
+
+    <!-- Сторінка акцій -->
+    <div id="promo-page" class="page">
+      <div class="header">
+        <h1>MicroFund</h1>
+        <p>Вітаємо, Іван Гараздюк!</p>
+        <p>Баланс: <span id="balance-promo">$234,000,000</span></p>
+      </div>
+      <div class="promo-page">
+        <h2>Акції та пропозиції</h2>
+        <div class="promo-card">
+          <h3>Бонус для нових інвесторів</h3>
+          <p>Інвестуйте $1000 і отримайте 2% бонусу на ваш баланс!</p>
+          <div class="promo-btn" onclick="applyPromo('bonus')">Активувати</div>
+        </div>
+        <div class="promo-card">
+          <h3>Преміум-акаунт</h3>
+          <p>Отримайте доступ до ексклюзивних проєктів за $10/місяць.</p>
+          <div class="promo-btn" onclick="applyPromo('premium')">Підключити</div>
+        </div>
+        <div class="promo-card">
+          <h3>Реферальна програма</h3>
+          <p>Запросіть друга та отримайте $50 на баланс!</p>
+          <div class="promo-btn" onclick="applyPromo('referral')">Отримати посилання</div>
+        </div>
+        <div class="nav-button" onclick="showPage('home-page')">Повернутися</div>
+      </div>
+      <div class="footer">
+        <p>© 2025 MicroFund. Усі права захищені.</p>
+      </div>
+    </div>
+
+    <!-- Сторінка акаунту -->
+    <div id="account-page" class="page">
+      <div class="header">
+        <h1>MicroFund</h1>
+        <p>Вітаємо, Іван Гараздюк!</p>
+        <p>Баланс: <span id="balance-account">$234,000,000</span></p>
+      </div>
+      <div class="account-page">
+        <h2>Мій акаунт</h2>
+        <div class="account-details">
+          <p><strong>Ім’я:</strong> Іван Гараздюк</p>
+          <p><strong>Email:</strong> ivan.harasdiuk@email.com</p>
+          <p><strong>Телефон:</strong> +380 987 654 321</p>
+          <p><strong>Баланс:</strong> <span id="account-balance">$234,000,000</span></p>
+          <p><strong>Останні транзакції:</strong></p>
+          <div id="transactions">
+            <div class="transaction"><p>Інвестовано $500 в проєкт Ахмеда — 15.04.2025</p></div>
+            <div class="transaction"><p>Отримано $20 прибутку — 20.04.2025</p></div>
+          </div>
+        </div>
+        <div class="nav-button" onclick="showPage('home-page')">Повернутися</div>
+      </div>
+      <div class="footer">
+        <p>© 2025 MicroFund. Усі права захищені.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let balance = 234000000;
+    const transactionsContainer = document.getElementById('transactions');
+
+    function updateBalance() {
+      document.getElementById('balance').textContent = `$${balance.toLocaleString()}`;
+      document.getElementById('balance-apply').textContent = `$${balance.toLocaleString()}`;
+      document.getElementById('balance-processing').textContent = `$${balance.toLocaleString()}`;
+      document.getElementById('balance-invest').textContent = `$${balance.toLocaleString()}`;
+      document.getElementById('balance-applications').textContent = `$${balance.toLocaleString()}`;
+      document.getElementById('balance-promo').textContent = `$${balance.toLocaleString()}`;
+      document.getElementById('balance-account').textContent = `$${balance.toLocaleString()}`;
+      document.getElementById('account-balance').textContent = `$${balance.toLocaleString()}`;
+    }
+
+    function invest(amount, project) {
+      if (balance >= amount) {
+        balance -= amount;
+        updateBalance();
+        const transaction = document.createElement('div');
+        transaction.classList.add('transaction');
+        transaction.innerHTML = `<p>Інвестовано $${amount} в проєкт ${project} — ${new Date().toLocaleDateString()}</p>`;
+        transactionsContainer.prepend(transaction);
+        showNotification(`Ви успішно інвестували $${amount} у проєкт ${project}!`);
+      } else {
+        showNotification('Недостатньо коштів на балансі!', 'error');
+      }
+    }
+
+    function applyPromo(type) {
+      if (type === 'bonus') {
+        const bonus = balance * 0.02;
+        balance += bonus;
+        updateBalance();
+        showNotification(`Бонус активовано! Ви отримали $${bonus.toFixed(2)}!`);
+      } else if (type === 'premium') {
+        if (balance >= 10) {
+          balance -= 10;
+          updateBalance();
+          showNotification('Преміум-акаунт підключено!');
+        } else {
+          showNotification('Недостатньо коштів для підключення преміум-акаунту!', 'error');
+        }
+      } else if (type === 'referral') {
+        showNotification('Ваше реферальне посилання: microfund.com/ref/ivan123');
+      }
+    }
+
+    function submitInvestment() {
+      const amount = document.getElementById('amount').value;
+      if (amount < 10) {
+        showNotification('Сума інвестування повинна бути не менше $10!', 'error');
+        return;
+      }
+      if (balance >= amount) {
+        balance -= amount;
+        updateBalance();
+        const transaction = document.createElement('div');
+        transaction.classList.add('transaction');
+        transaction.innerHTML = `<p>Інвестовано $${amount} через форму — ${new Date().toLocaleDateString()}</p>`;
+        transactionsContainer.prepend(transaction);
+        document.getElementById('confirmation-message').style.display = 'block';
+        document.querySelector('.investment-form').style.display = 'none';
+        showNotification(`Ви успішно інвестували $${amount}!`);
+      } else {
+        showNotification('Недостатньо коштів на балансі!', 'error');
+      }
+    }
+
+    function submitApplication() {
+      const applyForm = document.querySelector('.apply-form');
+      const confirmation = document.getElementById('apply-confirmation');
+      const amount = document.getElementById('loan-amount').value;
+      if (amount < 100) {
+        showNotification('Сума кредиту повинна бути не менше $100!', 'error');
+        return;
+      }
+      applyForm.style.display = 'none';
+      confirmation.style.display = 'block';
+      showNotification('Заявка успішно відправлена!');
+      setTimeout(() => showPage('processing-page'), 2000);
+    }
+
+    function showNotification(message, type = 'success') {
+      const notification = document.createElement('div');
+      notification.textContent = message;
+      notification.style.position = 'fixed';
+      notification.style.top = '20px';
+      notification.style.left = '50%';
+      notification.style.transform = 'translateX(-50%)';
+      notification.style.padding = '15px 25px';
+      notification.style.borderRadius = '10px';
+      notification.style.color = '#ffffff';
+      notification.style.background = type === 'success' ? '#2684ff' : '#ff4b5c';
+      notification.style.boxShadow = '0 5px 15px rgba(0, 82, 155, 0.3)';
+      notification.style.zIndex = '1000';
+      notification.style.opacity = '0';
+      notification.style.transition = 'opacity 0.5s ease';
+      document.body.appendChild(notification);
+
+      setTimeout(() => {
+        notification.style.opacity = '1';
+      }, 100);
+
+      setTimeout(() => {
+        notification.style.opacity = '0';
+        setTimeout(() => notification.remove(), 500);
+      }, 3000);
+    }
+
+    function showPage(pageId) {
+      document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+      document.getElementById(pageId).classList.add('active');
+    }
+
+    // Початкова ініціалізація балансу
+    updateBalance();
+  </script>
+</body>
+</html>
