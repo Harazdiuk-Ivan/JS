@@ -1,0 +1,37 @@
+{
+    "category": "Books",
+    "items": [
+        {
+            "id": 1,
+            "name": "Novel",
+            "shortname": "novel",
+            "description": "Bestselling fiction novel.",
+            "price": 14.99,
+            "image": "image/book/novel.png"
+        },
+        {
+            "id": 2,
+            "name": "Textbook",
+            "shortname": "textbook",
+            "description": "Comprehensive academic textbook.",
+            "price": 89.99,
+            "image": "image/book/textbook.png"
+        },
+        {
+            "id": 3,
+            "name": "Biography",
+            "shortname": "biography",
+            "description": "Inspiring life story.",
+            "price": 24.99,
+            "image": "image/book/biography.png"
+        },
+        {
+            "id": 4,
+            "name": "Cookbook",
+            "shortname": "cookbook",
+            "description": "Delicious recipes for all.",
+            "price": 29.99,
+            "image": "image/book/cookbook.png"
+        }
+    ]
+}

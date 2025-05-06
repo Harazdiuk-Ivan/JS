@@ -1,0 +1,37 @@
+{
+    "category": "Clothing",
+    "items": [
+        {
+            "id": 1,
+            "name": "Jacket",
+            "shortname": "jacket",
+            "description": "Warm winter jacket.",
+            "price": 89.99,
+            "image": "https://place-hold.it/200x500/FF6F61/fff"
+        },
+        {
+            "id": 2,
+            "name": "T-Shirt",
+            "shortname": "tshirt",
+            "description": "Comfortable cotton t-shirt.",
+            "price": 19.99,
+            "image": "https://place-hold.it/200x500/20C4CB/fff"
+        },
+        {
+            "id": 3,
+            "name": "Jeans",
+            "shortname": "jeans",
+            "description": "Stylish denim jeans.",
+            "price": 59.99,
+            "image": "https://place-hold.it/200x500/007bff/fff"
+        },
+        {
+            "id": 4,
+            "name": "Sneakers",
+            "shortname": "sneakers",
+            "description": "Trendy athletic shoes.",
+            "price": 79.99,
+            "image": "https://place-hold.it/200x500/FFCA28/fff"
+        }
+    ]
+}
