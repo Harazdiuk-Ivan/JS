@@ -1,32 +1,76 @@
-let boardState = [];
-let initialBoard;
-let steps = 0;
-let timeLeft = 10 * 60;
 let timerId;
-let usedConfigs = JSON.parse(localStorage.getItem('usedConfigs')) || [];
+let steps = 0;
 let minSteps = 0;
+let initialBoard;
+let boardState = [];
 let moveHistory = [];
 let stateHistory = [];
+let timeLeft = 10 * 60;
 let isTimerStarted = false;
+let usedConfigs = JSON.parse(localStorage.getItem('usedConfigs')) || [];
 
 async function loadConfig(configNumber) {
     if (![1, 2, 3, 4].includes(configNumber)) {
-        console.error(`Invalid config number: ${configNumber}`);
-        throw new Error(`Invalid config number: ${configNumber}`);
+        console.error("Помилка: неправильний номер конфігурації: " + configNumber);
+        return getBackupConfig(configNumber);
     }
     
     const response = await fetch(`https://harazdiuk-ivan.github.io/JS/JSlab6/configs/config${configNumber}.json`);
     if (!response.ok) {
-        throw new Error(`Failed to load config${configNumber}.json: ${response.status}`);
+        console.log("Помилка: не вдалося завантажити файл config" + configNumber + ".json");
+        return getBackupConfig(configNumber);
     }
-    const data = await response.json();
 
-    if (!data.board || !data.minSteps || !Array.isArray(data.board) || data.board.length !== 5 || !data.board.every(row => row.length === 5)) {
-        throw new Error(`Invalid JSON structure in config${configNumber}.json`);
-    }
+    const data = await response.json();
     console.log(`Loaded config ${configNumber} from server`);
     return data;
     
+}
+
+function getBackupConfig(configNumber) {
+    const configs = {
+        1: {
+            board: [
+                [1, 1, 1, 1, 1],
+                [0, 0, 1, 0, 0],
+                [1, 0, 1, 0, 1],
+                [1, 0, 1, 1, 1],
+                [0, 1, 0, 0, 1]
+            ],
+            minSteps: 7
+        },
+        2: {
+            board: [
+                [1, 0, 1, 0, 0],
+                [0, 1, 1, 1, 1],
+                [0, 0, 1, 1, 0],
+                [0, 0, 1, 0, 0],
+                [0, 1, 1, 1, 0]
+            ],
+            minSteps: 8
+        },
+        3: {
+            board: [
+                [1, 0, 0, 0, 0],
+                [0, 1, 1, 0, 1],
+                [1, 0, 0, 1, 1],
+                [0, 0, 1, 1, 1],
+                [1, 1, 0, 0, 0]
+            ],
+            minSteps: 9
+        },
+        4: {
+            board: [
+                [0, 0, 0, 0, 0],
+                [0, 0, 1, 0, 0],
+                [0, 1, 1, 1, 0],
+                [0, 0, 1, 0, 0],
+                [0, 0, 0, 0, 0]
+            ],
+            minSteps: 1
+        }
+    };
+    return configs[configNumber] || configs[1]; 
 }
 
 function createBoard(board) {
@@ -36,8 +80,11 @@ function createBoard(board) {
         alert('Помилка: не знайдено ігрове поле');
         return;
     }
+
     gameBoard.innerHTML = '';
+
     boardState = board.map(row => row.slice());
+
     board.forEach((row, rowIndex) => {
         row.forEach((cell, colIndex) => {
             const div = document.createElement('div');
