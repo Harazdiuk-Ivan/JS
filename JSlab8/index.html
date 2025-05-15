@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Адаптивний Каталог</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+        <div class="brand">Адаптивний Каталог</div>
+        <div class="hamburger" id="hamburger">☰</div>
+        <ul id="menu">
+            <li><a href="#">Головна</a></li>
+            <li><a href="#">Про нас</a></li>
+            <li><a href="#">Послуги</a></li>
+            <li><a href="#">Контакти</a></li>
+        </ul>
+    </nav>
+
+    <main id="main-content">
+        <div class="carousel">
+            <div class="slides" id="slides">
+                <img src="https://place-hold.it/600x400/3B82F6/FFF?text=Слайд+1" alt="Slide 1">
+                <img src="https://i.pinimg.com/736x/31/67/6a/31676ad21dc95e6dc4f2eeefe3a94d72.jpg" alt="Slide 2">
+                <img src="https://place-hold.it/600x400/3B82F6/FFF?text=Слайд+3" alt="Slide 3">
+            </div>
+            <button class="prev" id="prev">‹</button>
+            <button class="next" id="next">›</button>
+            <div class="indicators">
+                <span class="dot active" data-slide="0"></span>
+                <span class="dot" data-slide="1"></span>
+                <span class="dot" data-slide="2"></span>
+            </div>
+        </div>
+
+        <div class="images">
+            <img src="https://place-hold.it/300x200/1E3A8A/FFF?text=Large+1" class="large-only" alt="Large 1">
+            <img src="https://place-hold.it/300x200/2563EB/FFF?text=Large+2" class="large-only" alt="Large 2">
+            <img src="https://place-hold.it/300x200/3B82F6/FFF?text=Medium+1" class="medium-only" alt="Medium 1">
+            <img src="https://place-hold.it/300x200/1E3A8A/FFF?text=Medium+2" class="medium-only" alt="Medium 2">
+        </div>
+    </main>
+
+    <script src="LOG.js"></script>
+</body>
+</html>
