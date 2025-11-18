@@ -1,0 +1,185 @@
+/* styles.css */
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f7f0; /* Приємний світло-зелений фон */
+    color: #003300; /* Темно-зелений для тексту */
+    overflow: hidden;
+}
+
+.slide {
+    display: none;
+    height: 100vh;
+    width: 100vw;
+    padding: 60px;
+    box-sizing: border-box;
+    background-color: #ffffff; /* Білий фон для слайдів */
+    border: 2px solid #228B22; /* Зелений бордер */
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: opacity 0.8s ease, transform 0.5s ease;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.slide.active {
+    display: flex;
+    flex-direction: column;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.content {
+    display: flex;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    flex: 1;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.left-text .content {
+    flex-direction: row;
+}
+
+.right-text .content {
+    flex-direction: row-reverse;
+}
+
+.text-container {
+    flex: 1;
+    padding: 20px;
+    max-width: 50%;
+    overflow-y: auto; /* Якщо текст не влазить, додати скрол */
+    word-wrap: break-word;
+}
+
+h1, h2 {
+    color: #006400; /* Темно-зелений для заголовків */
+    font-family: 'Georgia', serif;
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    animation: fadeInDown 1s ease;
+}
+
+p {
+    font-size: 1.2em;
+    margin: 10px 0;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul li {
+    background: #e6f4e6; /* Світло-зелений фон для пунктів */
+    margin: 10px 0;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    animation: pulse 2s infinite ease-in-out;
+}
+
+ul ul {
+    margin-left: 20px;
+}
+
+img {
+    max-width: 45%; /* Зменшено для кращого розміщення */
+    max-height: 60vh;
+    margin: 0 20px;
+    border-radius: 15px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    animation: scalePulse 3s infinite ease-in-out;
+}
+
+.notes {
+    font-style: italic;
+    color: #4d4d4d; /* Темніший сірий для нотаток */
+    max-height: 500px;
+    max-width: 900px;
+    margin: 30px auto 0;
+    text-align: left;
+    border-top: 2px dashed #228B22;
+    padding: 15px;
+    background: #f9fff9;
+    border-radius: 10px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+    overflow-y: auto;
+    margin-bottom: 50px;
+}
+
+nav {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 10px 20px;
+    border-radius: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+button {
+    background-color: #228B22; /* Зелений для кнопок */
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    margin: 0 15px;
+    cursor: pointer;
+    border-radius: 25px;
+    font-size: 18px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button:hover {
+    background-color: #006400;
+    transform: scale(1.1);
+}
+
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: translateY(0);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+    50% {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    100% {
+        transform: translateY(0);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+}
+
+@keyframes scalePulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
